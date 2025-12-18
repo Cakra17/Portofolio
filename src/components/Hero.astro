@@ -1,0 +1,59 @@
+---
+const stack = [
+  'Go',
+  'JS/TS',
+  'Python',
+  'PostgreSQL',
+  'MySQL',
+  'Redis',
+  'Docker',
+  'React',
+  'Tailwind',
+];
+---
+
+<section id="about" class="relative min-h-screen flex items-center justify-center px-6">
+  <div class="max-w-3xl text-center">
+    <p class="mb-4 text-sm tracking-widest text-indigo-400 uppercase">
+      Software Engineer
+    </p>
+
+    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-slate-100">
+      Hi, I’m
+      <span class="text-indigo-400">Cakra</span>
+      <br class="hidden md:block" />
+      I Build Reliable Systems
+    </h1>
+
+    <p class="mt-6 text-slate-400 text-base md:text-lg leading-relaxed">
+      I’m a backend-focused developer who enjoys building scalable APIs,
+      distributed systems, and clean developer experiences.
+    </p>
+
+    <div class="mt-10 flex items-center justify-center gap-4">
+      <a
+        href="#contact"
+        class="inline-flex items-center justify-center rounded-xl px-6 py-3 bg-indigo-500 text-white font-medium hover:bg-indigo-400 transition shadow-lg shadow-indigo-500/30">
+        View Projects
+      </a>
+
+      <a
+        href="#contact"
+        class="inline-flex items-center justify-center rounded-xl px-6 py-3 border border-white/10 text-slate-200 hover:bg-white/5 transition">
+        Contact Me
+      </a>
+    </div>
+
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+      {stack.map((tech) => (
+        <span class="px-4 py-1.5 rounded-full
+                bg-white/5 backdrop-blur
+                border border-white/10
+                text-sm text-slate-300
+                hover:bg-white/10 hover:text-white transition">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

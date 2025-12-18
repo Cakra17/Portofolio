@@ -1,0 +1,74 @@
+---
+const experiences = [
+  {
+    role: 'Fullstack Developer',
+    company: 'MSIB Dicoding Batch 5',
+    period: 'Aug 2023 — Dec 2023',
+    description:
+      'Designed and maintained backend services handling high-volume requests.',
+    highlights: [
+      'Built REST APIs using JS',
+      'Improved system reliability',
+      'Crawling cooking recipe data'
+    ],
+    tech: ['JS', 'MongoDB', 'Express', "Cloudinary"],
+  },
+];
+---
+
+<section id="experience" class="relative py-25 px-6">
+  <div class="max-w-6xl mx-auto text-center mb-20">
+    <p class="text-sm uppercase tracking-widest text-indigo-400 mb-3">
+      Career
+    </p>
+    <h2 class="text-3xl md:text-4xl font-bold text-slate-100">
+      Experience
+    </h2>
+    <p class="mt-4 max-w-2xl mx-auto text-slate-400">
+      My professional journey focusing on backend systems, APIs,
+      and production-ready software.
+    </p>
+  </div>
+
+  <div class="relative max-w-4xl mx-auto">
+    <div class="absolute left-4 top-0 h-full w-px bg-white/10"></div>
+    {experiences.map((exp) => (
+      <div class="relative pl-12 pb-16">
+        <div class="absolute left-2 top-1 w-4 h-4 rounded-full bg-indigo-400"></div>
+        <div class="rounded-2xl bg-white/5 backdrop-blur
+                    border border-white/10 p-6">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-lg font-semibold text-slate-100">
+              {exp.role}
+            </h3>
+            <span class="text-sm text-slate-400">
+              {exp.period}
+            </span>
+          </div>
+
+          <p class="mt-1 text-sm text-indigo-400">
+            {exp.company}
+          </p>
+
+          <p class="mt-4 text-sm text-slate-400 leading-relaxed">
+            {exp.description}
+          </p>
+
+          <!-- Highlights -->
+          <ul class="mt-4 space-y-2 text-sm text-slate-400 list-disc list-inside">
+            {exp.highlights.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+
+          <!-- Tech -->
+          <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-300">
+            {exp.tech.map((tech) => (
+              <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">{tech}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
