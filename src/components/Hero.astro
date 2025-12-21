@@ -1,14 +1,15 @@
 ---
 const stack = [
-  'Go',
-  'JS/TS',
-  'Python',
-  'PostgreSQL',
-  'MySQL',
-  'Redis',
-  'Docker',
-  'React',
-  'Tailwind',
+  { name: 'Go', logo: 'go.svg'},
+  { name: 'JS', logo: 'js.svg'},
+  { name: 'TS', logo: 'ts.svg'},
+  { name: 'Python', logo: 'python.svg'},
+  { name: 'PostgreSQL', logo: 'postgresql.svg'},
+  { name: 'MySQL', logo: 'mysql.svg'},
+  { name: 'Redis', logo: 'redis.svg'},
+  { name: 'Docker', logo: 'docker.svg'},
+  { name: 'React', logo: 'react.svg'},
+  { name: 'Tailwind', logo: 'tailwind.svg'},
 ];
 ---
 
@@ -34,7 +35,7 @@ const stack = [
       <a
         href="#contact"
         class="inline-flex items-center justify-center rounded-xl px-6 py-3 bg-indigo-500 text-white font-medium hover:bg-indigo-400 transition shadow-lg shadow-indigo-500/30">
-        View Projects
+        Download CV
       </a>
 
       <a
@@ -46,13 +47,17 @@ const stack = [
 
     <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
       {stack.map((tech) => (
-        <span class="px-4 py-1.5 rounded-full
-                bg-white/5 backdrop-blur
-                border border-white/10
-                text-sm text-slate-300
-                hover:bg-white/10 hover:text-white transition">
-          {tech}
-        </span>
+        <div class="px-4 py-1.5 rounded-full
+        bg-white/5 backdrop-blur
+        border border-white/10
+        text-sm text-slate-300
+        hover:bg-white/10 hover:text-white transition
+        flex items-center gap-1"> 
+          <img src={tech.logo} alt={tech.name} class="w-6 h-6"> 
+          <span class="font-bold text-md">
+            {tech.name}
+          </span>
+        </div>
       ))}
     </div>
   </div>
