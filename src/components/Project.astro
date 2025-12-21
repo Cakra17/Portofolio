@@ -1,32 +1,49 @@
 ---
 const projects = [
   {
-    title: 'Job Queue & Worker System',
+    title: 'TQ',
     description:
-      'A Redis-based job queue with priority handling, retries, and crash-safe processing.',
-    tech: ['Go', 'Redis', 'Concurrency'],
-    link: '#',
+      `TQ is a Go-based task queue system that enables asynchronous processing of background jobs. 
+      It provides a robust foundation for handling time-consuming operations outside of the main application flow, 
+      improving application responsiveness and enabling horizontal scaling of worker processes.`,
+    techs: ['Go', 'Redis', 'Concurrency'],
+    link: 'https://github.com/Cakra17/tq',
   },
   {
     title: 'Media Social API',
     description:
-      'Secure auth with JWT, refresh token rotation, and device-based login.',
-    tech: ['Go', 'PostgreSQL', 'JWT'],
-    link: '#',
+      `Social API is a backend service implemented in Go that provides core API endpoints for a social platform. 
+      It is designed to be simple, modular, and ready for extension.`,
+    techs: ['Go', 'PostgreSQL', 'JWT'],
+    link: 'https://github.com/Cakra17/social',
   },
   {
-    title: 'Authentication Service',
+    title: 'IMPHNEN',
     description:
-      'Secure auth with JWT, refresh token rotation, and device-based login.',
-    tech: ['Go', 'PostgreSQL', 'JWT'],
-    link: '#',
+      `A comprehensive platform designed to help Indonesian UMKM (Micro, Small, and Medium Enterprises) 
+      automate financial record-keeping through AI-powered receipt scanning and streamline order management 
+      via Telegram bot integration.`,
+    techs: ['Go', 'PostgreSQL', 'Python', 'Kolosal AI', 'Svelte', 'TS'],
+    link: 'https://github.com/Cakra17/IMPHNEN',
   },
   {
-    title: 'Authentication Service',
+    title: 'Schemazz',
     description:
-      'Secure auth with JWT, refresh token rotation, and device-based login.',
-    tech: ['Go', 'PostgreSQL', 'JWT'],
-    link: '#',
+      `Schemazz is an interactive application that allows developers and database administrators to 
+      visualize database structures by converting SQL queries into clear, readable ERD diagrams. 
+      Built with modern web technologies, it provides a fast and intuitive way to understand database 
+      relationships and schema design.`,
+    techs: ['React', 'TS', 'Tailwind'],
+    link: 'https://github.com/Cakra17/Schemazz',
+  },
+  {
+    title: 'Paku',
+    description:
+      `PAKU (Presensi Akurat Klinik Asih Pratama Asih Usadha) is a mobile application developed to streamline 
+      attendance management and personnel administration for medical staff and employees at clinical healthcare 
+      facilities.`,
+    techs: ['Express', 'MySQL', 'React', 'Kotlin'],
+    link: 'https://github.com/orgs/Capstone-Project-PAKU/repositories',
   },
 ];
 ---
@@ -52,14 +69,14 @@ const projects = [
           <p class="text-slate-400 text-sm">{p.description}</p>
 
           <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-300">
-            {p.tech.map((t) => (
+            {p.techs.map((tech) => (
               <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">
-                {t}
+                {tech}
               </span>
             ))}
           </div>
 
-          <a href={p.link} class="inline-block mt-6 text-indigo-400 hover:text-indigo-300">
+          <a href={p.link} target="_blank" class="inline-block mt-6 text-indigo-400 hover:text-indigo-300">
             View Project →
           </a>
         </div>
