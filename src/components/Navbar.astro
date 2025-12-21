@@ -1,25 +1,18 @@
+---
+import Profile from '../assets/profile.jpg';
+import { Image } from 'astro:assets';
+---
 <header class="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-full px-4">
-  <div class="flex items-center justify-center max-w-4xl h-14 sm:h-16 mx-auto rounded-lg border border-[#1c1a1a] bg-transparent">
-    <nav class="flex justify-between items-center min-w-[80%] text-[1rem] capitalize text-white font-mono">
-      <a href="#" >
-        <img src="profile.jpg" class="w-10 rounded-full border border-white/10 aspect-square" alt="cakra.dev">
-      </a>
+  <div class="flex items-center justify-center max-w-4xl h-14 mx-auto rounded-lg border border-[#1c1a1a] bg-[#0f0e0e]">
+    <nav class="flex justify-between items-center min-w-full text-[1rem] capitalize text-white font-mono px-10">
+      <div class="flex items-center gap-3">
+        <Image src={Profile} alt="profile" class="w-10 rounded-full border border-white/10 aspect-square"/>
+        <a href="#"><span class="font-bold">Cakra.dev</span></a>
+      </div>
       <ul class="flex gap-5">
         <li class="hover:text-indigo-500 font-bold"><a href="#about">About</a></li>
         <li class="hover:text-indigo-500 font-bold"><a href="#projects">Project</a></li>
         <li class="hover:text-indigo-500 font-bold"><a href="#experience">Experience</a></li>
-      </ul>
-      <ul class="flex gap-5">
-        <li class="hover:text-indigo-500 font-bold">
-          <a href="https://github.com/cakra17" target="_blank">
-            Github
-          </a>
-        </li>
-        <li class="hover:text-indigo-500 font-bold">
-          <a href="https://www.linkedin.com/in/i-made-cakra-pustaka-5b46b929a" target="_blank">
-            LinkedIn
-          </a>
-        </li>
       </ul>
     </nav>
   </div>
