@@ -1,85 +1,49 @@
 ---
-const projects = [
-  {
-    title: 'TQ',
-    description:
-      `TQ is a Go-based task queue system that enables asynchronous processing of background jobs. 
-      It provides a robust foundation for handling time-consuming operations outside of the main application flow, 
-      improving application responsiveness and enabling horizontal scaling of worker processes.`,
-    techs: ['Go', 'Redis', 'Concurrency'],
-    link: 'https://github.com/Cakra17/tq',
-  },
-  {
-    title: 'Media Social API',
-    description:
-      `Social API is a backend service implemented in Go that provides core API endpoints for a social platform. 
-      It is designed to be simple, modular, and ready for extension.`,
-    techs: ['Go', 'PostgreSQL', 'JWT'],
-    link: 'https://github.com/Cakra17/social',
-  },
-  {
-    title: 'IMPHNEN',
-    description:
-      `A comprehensive platform designed to help Indonesian UMKM (Micro, Small, and Medium Enterprises) 
-      automate financial record-keeping through AI-powered receipt scanning and streamline order management 
-      via Telegram bot integration.`,
-    techs: ['Go', 'PostgreSQL', 'Python', 'Kolosal AI', 'Svelte', 'TS'],
-    link: 'https://github.com/Cakra17/IMPHNEN',
-  },
-  {
-    title: 'Schemazz',
-    description:
-      `Schemazz is an interactive application that allows developers and database administrators to 
-      visualize database structures by converting SQL queries into clear, readable ERD diagrams. 
-      Built with modern web technologies, it provides a fast and intuitive way to understand database 
-      relationships and schema design.`,
-    techs: ['React', 'TS', 'Tailwind'],
-    link: 'https://github.com/Cakra17/Schemazz',
-  },
-  {
-    title: 'Paku',
-    description:
-      `PAKU (Presensi Akurat Klinik Asih Pratama Asih Usadha) is a mobile application developed to streamline 
-      attendance management and personnel administration for medical staff and employees at clinical healthcare 
-      facilities.`,
-    techs: ['Express', 'MySQL', 'React', 'Kotlin'],
-    link: 'https://github.com/orgs/Capstone-Project-PAKU/repositories',
-  },
-];
+import { Icon } from 'astro-icon/components';
+import Reveal from './Reveal.astro';
+import { projects } from '../data/projects';
 ---
 
-<section id="projects" class="relative py-25 px-6">
-  <div class="max-w-6xl mx-auto text-center mb-16">
-    <p class="text-sm uppercase tracking-widest text-indigo-400 mb-3">
-      Selected Work
-    </p>
-    <h2 class="text-3xl md:text-4xl font-bold text-slate-100">
-      Projects
-    </h2>
-    <p class="mt-4 max-w-2xl mx-auto text-slate-400">
-      A collection of things I’ve built, focusing on backend systems,
-      performance, and clean architecture.
-    </p>
-  </div>
+<section id="projects" class="relative py-25">
+  <div class="section-shell">
+    <Reveal class="mx-auto mb-16 max-w-2xl text-center">
+      <p class="eyebrow mb-3">Selected Work</p>
+      <h2 class="text-3xl font-bold text-text md:text-4xl">Projects</h2>
+      <p class="mt-4 text-muted">
+        A collection of things I've built, focusing on backend systems,
+        performance, and clean architecture.
+      </p>
+    </Reveal>
 
-  <div class="max-w-6xl mx-auto grid gap-6 md:grid-cols-2">
-      {projects.map((p) => (
-        <div class="rounded-2xl bg-white/5 backdrop-blur border border-white/10 p-6 hover:bg-white/10 transition">
-          <h3 class="text-xl font-semibold text-slate-100 mb-2">{p.title}</h3>
-          <p class="text-slate-400 text-sm">{p.description}</p>
+    <div class="grid gap-6 md:grid-cols-2">
+      {projects.map((p, i) => (
+        <Reveal delay={i * 80}>
+          <article class="card card-hover group flex h-full flex-col p-6">
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="text-xl font-semibold text-text">{p.title}</h3>
+              <a
+                href={p.link}
+                target="_blank"
+                rel="noopener"
+                aria-label={`Open ${p.title} on GitHub`}
+                class="text-muted transition group-hover:text-accent"
+              >
+                <Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+              </a>
+            </div>
 
-          <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-300">
-            {p.techs.map((tech) => (
-              <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10">
-                {tech}
-              </span>
-            ))}
-          </div>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">
+              {p.description}
+            </p>
 
-          <a href={p.link} target="_blank" class="inline-block mt-6 text-indigo-400 hover:text-indigo-300">
-            View Project →
-          </a>
-        </div>
+            <div class="mt-5 flex flex-wrap gap-2">
+              {p.techs.map((tech) => (
+                <span class="chip">{tech}</span>
+              ))}
+            </div>
+          </article>
+        </Reveal>
       ))}
     </div>
+  </div>
 </section>

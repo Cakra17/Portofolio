@@ -1,66 +1,77 @@
 ---
-const stack = [
-  { name: 'Go', logo: 'go.svg'},
-  { name: 'JS', logo: 'js.svg'},
-  { name: 'TS', logo: 'ts.svg'},
-  { name: 'Python', logo: 'python.svg'},
-  { name: 'PostgreSQL', logo: 'postgresql.svg'},
-  { name: 'MySQL', logo: 'mysql.svg'},
-  { name: 'Redis', logo: 'redis.svg'},
-  { name: 'Docker', logo: 'docker.svg'},
-  { name: 'React', logo: 'react.svg'},
-  { name: 'Tailwind', logo: 'tailwind.svg'},
-];
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+import { skills } from '../data/skills';
 ---
 
-<section id="about" class="relative min-h-screen flex items-center justify-center px-6">
-  <div class="max-w-3xl text-center">
-    <p class="mb-4 text-sm tracking-widest text-indigo-400 uppercase">
-      Software Engineer
-    </p>
+<section
+  id="about"
+  class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-24"
+>
+  <!-- Background glow -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10"
+  >
+    <div
+      class="absolute left-1/2 top-1/4 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+      style="background: radial-gradient(circle, rgb(var(--glow) / 0.6), transparent 60%);"
+    >
+    </div>
+    <div
+      class="absolute inset-0 -z-10 opacity-[0.04]"
+      style="background-image: radial-gradient(rgb(var(--glow)) 1px, transparent 1px); background-size: 28px 28px;"
+    >
+    </div>
+  </div>
 
-    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-slate-100">
-      Hi, I’m
-      <span class="text-indigo-400">Cakra</span>
-      <br class="hidden md:block" />
-      I Build Reliable Systems
+  <div class="max-w-3xl text-center">
+    <p class="eyebrow mb-5">{site.role}</p>
+
+    <h1 class="text-4xl font-bold tracking-tight text-text sm:text-5xl md:text-6xl">
+      Hi, I'm
+      <span class="text-accent">{site.shortName}</span>
+      <br class="hidden sm:block" />
+      {site.tagline[0]} <span class="text-accent">{site.tagline[1]}</span>
     </h1>
 
-    <p class="mt-6 text-slate-400 text-base md:text-lg leading-relaxed">
-      I’m a backend-focused developer who enjoys building scalable APIs,
-      distributed systems, and clean developer experiences.
+    <p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+      {site.bio}
     </p>
 
-    <div class="mt-10 flex items-center justify-center gap-4">
-      <a
-        href="I_Made_Cakra_Pustaka_CV.pdf"
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center justify-center rounded-xl px-6 py-3 bg-indigo-500 text-white font-medium hover:bg-indigo-400 transition shadow-lg shadow-indigo-500/30">
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+      <a href={site.cv} target="_blank" rel="noopener" class="btn-primary">
+        <Icon name="lucide:download" class="h-4 w-4" />
         Download CV
       </a>
-
-      <a
-        href="#contact"
-        class="inline-flex items-center justify-center rounded-xl px-6 py-3 border border-white/10 text-slate-200 hover:bg-white/5 transition">
+      <a href="#contact" class="btn-ghost">
+        <Icon name="lucide:mail" class="h-4 w-4" />
         Contact Me
       </a>
     </div>
 
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
-      {stack.map((tech) => (
-        <div class="px-4 py-1.5 rounded-full
-        bg-white/5 backdrop-blur
-        border border-white/10
-        text-sm text-slate-300
-        hover:bg-white/10 hover:text-white transition
-        flex items-center gap-1"> 
-          <img src={tech.logo} alt={tech.name} class="w-6 h-6"> 
-          <span class="font-bold text-md">
+    <div class="mt-12">
+      <p class="mb-4 font-mono text-xs uppercase tracking-widest text-muted">
+        Tech I work with
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-2.5">
+        {skills.map((tech) => (
+          <span class="chip hover:border-accent/40 hover:text-text transition">
+            <img src={tech.logo} alt={tech.name} class="h-4 w-4" />
             {tech.name}
           </span>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
+
+    <!-- Scroll hint -->
+    <a
+      href="#projects"
+      aria-label="Scroll to projects"
+      class="mt-16 inline-flex items-center gap-2 font-mono text-xs text-muted transition hover:text-accent"
+    >
+      <span class="animate-bounce"><Icon name="lucide:chevron-down" class="h-4 w-4" /></span>
+      Scroll
+    </a>
   </div>
 </section>

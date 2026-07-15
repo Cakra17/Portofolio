@@ -1,20 +1,152 @@
 ---
-import Profile from '../assets/profile.jpg';
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import Profile from '../assets/profile.jpg';
+import ThemeToggle from './ThemeToggle.astro';
+import { site } from '../data/site';
 ---
-<header class="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-full px-4">
-  <div class="flex items-center justify-center max-w-4xl h-14 mx-auto rounded-lg border border-[#1c1a1a] bg-[#0f0e0e]">
-    <nav class="flex justify-between items-center min-w-full text-[1rem] capitalize text-white font-mono px-10">
-      <div class="flex items-center gap-3">
-        <Image src={Profile} alt="profile" class="w-10 rounded-full border border-white/10 aspect-square"/>
-        <a href="#"><span class="font-bold">Cakra.dev</span></a>
-      </div>
-      <ul class="flex gap-5">
-        <li class="hover:text-indigo-500 font-bold"><a href="#about">About</a></li>
-        <li class="hover:text-indigo-500 font-bold"><a href="#projects">Project</a></li>
-        <li class="hover:text-indigo-500 font-bold"><a href="#experience">Experience</a></li>
-      </ul>
+
+<header
+  id="navbar"
+  class="fixed top-4 left-1/2 z-50 w-full max-w-4xl -translate-x-1/2 px-4"
+>
+  <div
+    id="navbar-pill"
+    class="flex h-14 items-center justify-between rounded-xl border border-border bg-surface/60 px-4 backdrop-blur-md transition-colors duration-300 sm:px-5"
+  >
+    <!-- Brand -->
+    <a href="#" class="flex items-center gap-3">
+      <Image
+        src={Profile}
+        alt={site.name}
+        class="aspect-square w-9 rounded-full border border-border object-cover"
+      />
+      <span class="font-mono text-sm font-bold text-text">{site.brand}</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
+      {site.nav.map((item) => (
+        <a
+          href={item.href}
+          data-navlink={item.href}
+          class="rounded-lg px-3 py-2 text-sm font-medium text-muted transition hover:text-accent"
+        >
+          {item.label}
+        </a>
+      ))}
     </nav>
+
+    <!-- Right actions -->
+    <div class="flex items-center gap-2">
+      <a
+        href={site.social.github}
+        target="_blank"
+        rel="noopener"
+        aria-label="GitHub"
+        class="hidden h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface-2 text-muted transition hover:text-accent hover:border-accent/40 sm:inline-flex"
+      >
+        <Icon name="lucide:github" class="h-5 w-5" />
+      </a>
+      <ThemeToggle />
+
+      <!-- Mobile menu button -->
+      <button
+        id="menu-toggle"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface-2 text-text transition hover:text-accent md:hidden"
+      >
+        <Icon name="lucide:menu" class="h-5 w-5" id="menu-icon-open" />
+        <Icon name="lucide:x" class="hidden h-5 w-5" id="menu-icon-close" />
+      </button>
+    </div>
   </div>
+
+  <!-- Mobile menu -->
+  <nav
+    id="mobile-menu"
+    aria-label="Mobile"
+    class="mt-2 hidden flex-col gap-1 rounded-xl border border-border bg-surface/95 p-3 backdrop-blur-md md:hidden"
+  >
+    {site.nav.map((item) => (
+      <a
+        href={item.href}
+        data-navlink={item.href}
+        class="mobile-link rounded-lg px-4 py-3 text-sm font-medium text-muted transition hover:bg-surface-2 hover:text-accent"
+      >
+        {item.label}
+      </a>
+    ))}
+    <a
+      href={site.social.github}
+      target="_blank"
+      rel="noopener"
+      class="mobile-link flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-muted transition hover:bg-surface-2 hover:text-accent"
+    >
+      <Icon name="lucide:github" class="h-4 w-4" /> GitHub
+    </a>
+  </nav>
 </header>
 
+<script>
+  const pill = document.getElementById('navbar-pill');
+  const onScroll = () => {
+    if (!pill) return;
+    if (window.scrollY > 12) {
+      pill.classList.add('shadow-lg', 'shadow-black/5');
+    } else {
+      pill.classList.remove('shadow-lg', 'shadow-black/5');
+    }
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  const setMenu = (open: boolean) => {
+    mobileMenu?.classList.toggle('hidden', !open);
+    mobileMenu?.classList.toggle('flex', open);
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+    menuToggle?.setAttribute('aria-expanded', String(open));
+    menuToggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+
+  menuToggle?.addEventListener('click', () => {
+    const open = mobileMenu?.classList.contains('hidden');
+    setMenu(!!open);
+  });
+
+  document.querySelectorAll<HTMLAnchorElement>('.mobile-link').forEach((link) => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+
+  // Scroll-spy: highlight the nav link for the section in view
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-navlink]');
+  const sections = [...links]
+    .map((l) => document.querySelector(l.getAttribute('href') ?? ''))
+    .filter(Boolean) as Element[];
+
+  const spy = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = `#${entry.target.id}`;
+        links.forEach((l) => {
+          const active = l.getAttribute('href') === id;
+          l.classList.toggle('text-accent', active);
+          l.classList.toggle('text-muted', !active);
+        });
+      });
+    },
+    { rootMargin: '-45% 0px -50% 0px' }
+  );
+  sections.forEach((s) => spy.observe(s));
+</script>

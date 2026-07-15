@@ -3,15 +3,16 @@ import Hero from '../components/Hero.astro';
 import Navbar from '../components/Navbar.astro';
 import Project from '../components/Project.astro';
 import Experience from '../components/Experience.astro';
-import Layout from '../layouts/Layout.astro';
 import Contact from '../components/Contact.astro';
-import "../styles/global.css"
+import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<Navbar/>
-	<Hero/>
-	<Project/>
-	<Experience/>
-	<Contact/>
+	<Navbar />
+	<main id="main">
+		<Hero />
+		<Project />
+		<Experience />
+		<Contact />
+	</main>
 </Layout>
