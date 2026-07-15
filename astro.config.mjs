@@ -4,10 +4,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 
-import vercel from '@astrojs/vercel';
-
 // https://astro.build/config
 export default defineConfig({
+  site: "https://cakra17.github.io",
+  base: "/Portofolio/",
+
   output:'static',
 
   server: {
@@ -19,6 +20,4 @@ export default defineConfig({
   },
 
   integrations: [icon()],
-
-  adapter: vercel(),
 });
